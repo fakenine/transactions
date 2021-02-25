@@ -7,6 +7,7 @@
       selectable
       :select-mode="selectMode"
       @row-selected="onRowSelected"
+      :no-provider-sorting="true"
     >
       <template #cell(show_details)="row">
         <b-button size="sm" @click="row.toggleDetails" class="mr-2">
