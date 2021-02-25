@@ -1,28 +1,30 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container-fluid">
+      <div class="row">
+        <Sidebar />
+        <div class="col-6 offset-3">
+          <TransactionsTable />
+        </div>
+        <div class="col-2">
+          <TransactionsPanel />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Sidebar from './components/Sidebar.vue'
+import TransactionsTable from './components/TransactionsTable.vue'
+import TransactionsPanel from './components/TransactionsPanel.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Sidebar,
+    TransactionsTable,
+    TransactionsPanel
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
