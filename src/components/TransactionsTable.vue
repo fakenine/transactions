@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-5">
     <b-table
       hover
       :items="itemsProvider"
@@ -9,6 +9,21 @@
       @row-selected="onRowSelected"
       :no-provider-sorting="true"
     >
+      <template #cell(amount)="data">
+        {{ data.value }}
+        <b-icon v-if="data.item.credit == 'true'" icon="triangle-fill" class="payment-triangle credit-triangle"></b-icon>
+        <b-icon v-else icon="triangle-fill" flip-v class="payment-triangle debit-triangle"></b-icon>
+      </template>
+
+      <template #head(attachements)>
+        <b-icon icon="paperclip"></b-icon>
+      </template>
+
+      <template #cell(attachements)="data">
+        <b-icon icon="paperclip"></b-icon>
+        {{ data.item.attachements.length }}
+      </template>
+
       <template #cell(show_details)="row">
         <b-button size="sm" @click="row.toggleDetails" class="mr-2">
           {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
@@ -62,16 +77,25 @@
 
 <script>
   import axios from 'axios';
+  import dayjs from 'dayjs';
 
   export default {
     name: 'TransactionsTable',
     data() {
       return {
         fields: [
-          { key: 'created_at', sortable: true },
+          {
+            key: 'created_at',
+            sortable: true,
+            label: 'DD-MM-YYYY',
+            formatter: value => {
+              return dayjs(value).format('DD-MM-YYYY')
+            }
+          },
           { key: 'counterparty_name', sortable: true },
-          { key: 'operation_type', sortable: true },
+          { key: 'operation_type', sortable: true, label: 'Payment type' },
           { key: 'amount', sortable: true },
+          'attachements',
           'show_details'
         ],
         selectMode: 'range',
@@ -96,3 +120,17 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .payment-triangle {
+    font-size: 10px;
+  }
+
+  .credit-triangle {
+    color: lightblue;
+  }
+
+  .debit-triangle {
+    color: red;
+  }
+</style>

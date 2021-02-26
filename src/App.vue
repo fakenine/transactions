@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <div class="container-fluid">
+      <Navbar />
       <div class="row">
-        <Sidebar />
-        <div class="col-6 offset-3">
+        <div class="col-2 bg-dark">
+          <Sidebar />
+        </div>
+        <div class="col-8 p-5">
           <TransactionsTable />
         </div>
         <div class="col-2">
@@ -16,6 +19,7 @@
 
 <script>
 import Sidebar from './components/Sidebar.vue'
+import Navbar from './components/Navbar.vue'
 import TransactionsTable from './components/TransactionsTable.vue'
 import TransactionsPanel from './components/TransactionsPanel.vue'
 
@@ -23,6 +27,7 @@ export default {
   name: 'App',
   components: {
     Sidebar,
+    Navbar,
     TransactionsTable,
     TransactionsPanel
   }
